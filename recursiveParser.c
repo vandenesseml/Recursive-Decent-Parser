@@ -63,16 +63,17 @@ void Factor() {
 }
 
 void Number() {
-  while (isdigit(expression[index])) {
-    index++;
+  if(isdigit(expression[index])) {
+    while (isdigit(expression[index])) {
+      index++;
+    }
+  } else {
+    validExpression = 0;
   }
 }
 
 void Addition() {
     if(expression[index] == (char)43) {
-      if ((!isdigit(expression[index-1]) && ((expression[index-1]) != (char)41))) {
-        validExpression = 0;
-      }
       index++;
     Expression();
   }
@@ -80,9 +81,6 @@ void Addition() {
 
 void Multiplication() {
   if(expression[index] == (char)42){
-    if ((!isdigit(expression[index-1]) && ((expression[index-1]) != (char)41))) {
-      validExpression = 0;
-    }
     index++;
     Term();
   }
