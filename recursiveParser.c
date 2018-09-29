@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int index, validExpression;
+int index, validExpression, token;
 char expression[100];
 int main(int argc, char *argv[]) {
   FILE* file;
@@ -14,6 +14,7 @@ int main(int argc, char *argv[]) {
 } else {
   file=fopen("parserTokenizedInput.txt", "r");
 }
+token = 0;
 while(fgets(expression, sizeof(expression), file)) {
   index = 0;
   validExpression = 1;
@@ -22,12 +23,12 @@ while(fgets(expression, sizeof(expression), file)) {
   if (!expression[expressionSize]) {
     expressionSize = expressionSize-1;
   }
-  if(expressionSize == (index) && validExpression) {
-    printf("\n%sValid\n\n", expression);
-  } else{
-    printf("\n%sInvalid\n\n", expression);
+  token++;
+  if(expressionSize != (index) || !validExpression) {
+    printf("Token stirng %i invalid\n", token);
   }
 }
+printf("End Of File Reached\n");
 close(file);
   return 0;
 }
